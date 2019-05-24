@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: ApiGateWay
+   
+---
+spring:
+  profiles: LOCAL
+
+  cloud:
+    config:
+      uri: http://localhost:8001
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+    
+---   
+spring:
+  profiles: DISCOVERY
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: ConfigurationRepository
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka

@@ -1,0 +1,31 @@
+server:
+  port: 8001
+  
+spring: 
+ application:
+    name: ConfigurationRepository 
+ cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ArunKumarDas-120/configuration 
+eureka:
+  instance:
+    prefer-ip-address: true
+---  
+spring:
+  profiles: LOCAL
+  
+eureka:
+  client: 
+    enabled:  false    
+---   
+spring:
+  profiles: DISCOVERY
+  
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka

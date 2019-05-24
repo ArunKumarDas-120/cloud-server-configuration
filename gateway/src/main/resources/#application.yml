@@ -1,0 +1,35 @@
+server:
+  port: 1234
+  
+spring:
+  application:
+    name: ApiGateWay
+  cloud:
+    config:
+      discovery:
+        service-id: ConfigurationRepository
+        enabled: false
+zuul:
+  routes:
+    inventory:
+      path: /inventory/**
+      service-id: INVENTORY_SERVICE
+      strip-prefix: true
+---
+spring:
+  profiles: LOCAL
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+---
+spring:
+  profiles: CLUSTER
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka-pear2:2222/eureka/
