@@ -9,7 +9,7 @@ eureka:
       defaultZone: http://localhost:8000/eureka  
 server:
   port: 8000
-  
+
 ---
 spring:
   profiles: peer1
@@ -18,11 +18,10 @@ server:
 eureka:
   client:
     fetch-registry: false
-    register-with-eureka: false
+    register-with-eureka: true
     service-url:
       defaultZone: http://eureka-pear2:${peer2.port}/eureka,http://eureka-pear1:${server.port}/eureka
   instance:
-    appname: Cluster
     hostname: eureka-pear1
     preferIpAddress: true
 
@@ -34,10 +33,9 @@ server:  port: ${serverport:8001}
 eureka:
   client:
     fetch-registry: false
-    register-with-eureka: false
+    register-with-eureka: true
     service-url:
       defaultZone: http://eureka-pear1:${peer1.port}/eureka,http://eureka-pear2:${server.port}/eureka
   instance:
-    appname: Cluster
     hostname: eureka-pear2 
     preferIpAddress: true
