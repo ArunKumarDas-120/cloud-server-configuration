@@ -1,24 +1,21 @@
 server:
-  port: 8001
+  port: 8002
   
 spring: 
  application:
-    name: ConfigurationRepository 
+    name: ConfigServer 
  cloud:
     config:
       server:
         git:
           uri: https://github.com/ArunKumarDas-120/configuration 
-eureka:
-  instance:
-    prefer-ip-address: true
----  
-spring:
-  profiles: LOCAL
-  
+ rabbitmq:    port: 5672
+    host: localhost    password: guest    username: guest
+    
 eureka:
   client: 
-    enabled:  false    
+    enabled:  false 
+
 ---   
 spring:
   profiles: DISCOVERY
@@ -29,3 +26,6 @@ eureka:
     register-with-eureka: true
     serviceUrl:
       defaultZone: http://localhost:8000/eureka
+  instance: 
+    prefer-ip-address: true
+    
